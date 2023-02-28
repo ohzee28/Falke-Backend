@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const firebaseUploader = require("../middlewares/upload");
 
 const {
     getAllArticles,
@@ -9,7 +10,7 @@ const {
     deleteArticle,
 } = require("../controllers/article");
 
-router.route("/articles").get(getAllArticles).post(createArticle);
+router.route("/articles").get(getAllArticles).post(firebaseUploader.single("image"),createArticle);
 router
     .route("/articles/:id")
     .get(getSingleArticle)

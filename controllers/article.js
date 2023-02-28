@@ -11,9 +11,11 @@ const getAllArticles = async (req, res) => {
 };
 
 const createArticle = async (req, res) => {
+    console.log('in controller', req.file)
     const { date, body, author, headline } = req.body;
+    const { file } = req;
     try {
-        const newArticle = await Article.create({ date, body, author, headline });
+        const newArticle = await Article.create({ date, body, author, headline, image: file.publicUrl });
         res.status(201).json(newArticle);
     } catch (err) {
         console.log(err);

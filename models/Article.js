@@ -21,7 +21,12 @@ const Article = new Schema({
     author: {
         type: String,
         required: true,
+    },
+    image: {
+        type: String,
     }
+
+
 
 });
 
