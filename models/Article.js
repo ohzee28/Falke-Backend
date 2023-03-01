@@ -27,7 +27,6 @@ const Article = new Schema({
     }
 
 
-
 });
 
 //3.Schema als Model exportieren ('Collectionname', Schema)
