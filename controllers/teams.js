@@ -12,11 +12,18 @@ const getAllTeams = async (req, res) => {
 
 const createTeam = async (req, res) => {
     console.log('in controller', req.file)
-    const { teamname } = req.body;
+    const { teamname, websitekeys } = req.body;
     const { file } = req;
+    console.log('req', req.body)
     try {
-        const newTeam = await Team.create({ teamname, image: file.publicUrl });
-        res.status(201).json(newTeam);
+        if (file) {
+            const newTeam = await Team.create({ teamname, image: file.publicUrl, websitekeys });
+            return res.status(201).json(newTeam);
+        } else {
+            const newTeam = await Team.create({ teamname, websitekeys });
+            return res.status(201).json(newTeam);
+        }
+        console.log(newTeam)
     } catch (err) {
         console.log(err);
         res.status(500).send(err.message);
@@ -36,10 +43,11 @@ const getSingleTeam = async (req, res) => {
 };
 
 const updateTeam = async (req, res) => {
+    console.log('test', req.body);
     const { id } = req.params;
-    const { teamname } = req.body;
+    const { teamname, websitekeys } = req.body;
     try {
-        const updateTeam = await Team.findByIdAndUpdate(id, { teamname },
+        const updateTeam = await Team.findByIdAndUpdate(id, { teamname, websitekeys },
             { new: true });
         res.status(200).json(updateTeam);
     } catch (err) {

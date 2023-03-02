@@ -6,12 +6,16 @@ const { Schema } = mongoose;
 //2.Neue Schema Instanz erstellen
 const Team = new Schema({
     teamname: {
-        type: String,
+        type: String
     },
 
     image: {
-        type: String,
-    }
+        type: String
+    },
+
+    websitekeys: {
+        type: Array
+    },
 
 });
 
